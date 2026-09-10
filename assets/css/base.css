@@ -1,0 +1,182 @@
+/* ==========================================================================
+   BASE — tokens, tipografia e reset
+   Para trocar a identidade do cliente, mexa só em --cor-base e
+   --cor-acento (ou nas cores do objeto `marca` em dados.js).
+   ========================================================================== */
+
+:root {
+  /* Paleta bruta — cinza escuro dominante, cinza claro, vermelho vivo -- */
+  --grafite: #1c1d1f;
+  --grafite-alto: #26282b;
+  --grafite-linha: #35383c;
+  --cinza-claro: #e8e9eb;
+  --cinza-claro-alto: #f4f5f6;
+  --cinza-medio: #9ba0a6;
+  --vermelho: #e6252d;
+  --vermelho-escuro: #c01a21;
+
+  /* Cores da marca — sobrescritas por dados.js em tempo de execução */
+  --cor-base: #1c1d1f;
+  --cor-acento: #e6252d;
+
+  /* Papéis semânticos ------------------------------------------------- */
+  --cor-fundo: var(--cor-base);
+  --cor-superficie: var(--grafite-alto);
+  --cor-linha: var(--grafite-linha);
+  --cor-texto: var(--cinza-claro);
+  --cor-texto-suave: var(--cinza-medio);
+
+  /* Seções claras invertem os papéis */
+  --claro-fundo: var(--cinza-claro);
+  --claro-superficie: var(--cinza-claro-alto);
+  --claro-texto: var(--grafite);
+  --claro-texto-suave: #5f646a;
+  --claro-linha: #d0d2d5;
+
+  /* Tipografia — serifa de display com itálico, e grotesca no texto --- */
+  --fonte-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --t-hero: clamp(3rem, 8.5vw, 7.5rem);
+  --t-gigante: clamp(2.5rem, 7vw, 6rem);
+  --t-titulo: clamp(2rem, 4vw, 3.25rem);
+  --t-corpo: clamp(1rem, 1.05vw, 1.0625rem);
+  --t-miudo: 0.75rem;
+
+  /* Espaçamento e formas ---------------------------------------------- */
+  --e-1: 0.5rem;
+  --e-2: 1rem;
+  --e-3: 1.75rem;
+  --e-4: 3rem;
+  --e-5: 5rem;
+  --e-secao: clamp(4.5rem, 9vw, 8rem);
+
+  --raio: 20px;
+  --raio-grande: 32px;
+  --largura-max: 1240px;
+}
+
+/* Reset ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-texto);
+  font-size: var(--t-corpo);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Tipografia ------------------------------------------------------------- */
+h1,
+h2,
+h3 {
+  font-family: var(--fonte-display);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+/* A palavra marcada com *asteriscos* em dados.js vira isto: itálico na
+   cor de destaque. É o que dá o sotaque tipográfico do site. */
+.destaque {
+  font-style: italic;
+  color: var(--cor-acento);
+}
+
+.chapeu {
+  font-family: var(--fonte-texto);
+  font-size: var(--t-miudo);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cor-acento);
+  margin-bottom: var(--e-2);
+}
+
+.aviso {
+  border-left: 2px solid var(--cor-acento);
+  padding-left: var(--e-2);
+  color: var(--cor-texto-suave);
+  max-width: 52ch;
+}
+
+/* Acessibilidade --------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--cor-acento);
+  outline-offset: 3px;
+}
+
+.pular-para {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+  background: var(--cor-acento);
+  color: #fff;
+  padding: var(--e-2) var(--e-3);
+  font-weight: 600;
+}
+
+.pular-para:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulso — Academia</title>
+<meta name="description" content="Academia com musculação, estúdios de aula e área de recuperação. Quatro unidades em São Paulo, das 6h às 23h.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231c1d1f'/%3E%3Cpath d='M4 17h6l3-7 4 14 3-7h8' fill='none' stroke='%23e6252d' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/secoes.css">
+</head>
+<body>
+
+<a class="pular-para" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="cabecalho">
+  <div class="cabecalho__interno">
+    <a class="marca" href="#inicio" data-campo="nome">Pulso</a>
+    <nav class="navegacao" aria-label="Seções do site">
+      <a href="#estrutura">Estrutura</a>
+      <a href="#modalidades">Aulas</a>
+      <a href="#unidades">Unidades</a>
+      <a href="#app">Aplicativo</a>
+    </nav>
+    <a class="botao botao--acento botao--pequeno" data-zap-simples href="#planos">Seja membro</a>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <!-- 1. HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero__fundo" aria-hidden="true"></div>
+    <div class="hero__interno">
+      <h1 class="hero__titulo" data-campo="hero-titulo"></h1>
+      <p class="hero__linha" data-campo="hero-linha"></p>
+      <a class="botao botao--acento botao--grande" data-zap-simples href="#planos"
+         data-campo="hero-botao">Matricule-se</a>
+    </div>
+  </section>
+
+  <!-- 2. MANIFESTO -->
+  <section class="secao secao--manifesto" id="sobre">
+    <div class="secao__fundo" aria-hidden="true"></div>
+    <div class="secao__interno">
+      <h2 class="titulo-gigante" data-campo="manifesto-titulo"></h2>
+      <div class="cartao-manifesto">
+        <div class="cartao-manifesto__colunas" data-manifesto-colunas></div>
+        <a class="botao botao--claro" data-zap-simples href="#planos"
+           data-campo="manifesto-botao">Matricule-se</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DECLARAÇÃO -->
+  <section class="secao secao--declaracao">
+    <p class="declaracao" data-declaracao></p>
+  </section>
+
+  <!-- 4. VITRINE -->
+  <section class="secao secao--vitrine" id="estrutura">
+    <div class="vitrine" data-vitrine hidden></div>
+    <div class="secao__interno secao__interno--centro">
+      <a class="botao botao--vazado" href="#unidades" data-campo="vitrine-botao">Conhecer as unidades</a>
+    </div>
+
+    <noscript>
+      <div class="secao__interno">
+        <p class="aviso">A galeria da estrutura precisa de JavaScript. Os endereços das unidades
+          estão no <a href="#contato">rodapé</a>.</p>
+      </div>
+    </noscript>
+  </section>
+
+  <!-- 5. MODALIDADES EM CARDS -->
+  <section class="secao secao--modalidades" id="modalidades">
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="chapeu" data-campo="modalidades-chapeu"></p>
+        <h2 class="secao__titulo" data-campo="modalidades-titulo"></h2>
+      </header>
+      <div class="cards" data-modalidades hidden></div>
+    </div>
+  </section>
+
+  <!-- 6. UNIDADES -->
+  <section class="secao secao--unidades" id="unidades">
+    <div class="unidades">
+      <div class="unidades__foto">
+        <img src="assets/img/unidades.jpg" alt="Recepção de uma unidade da academia" loading="lazy" decoding="async">
+      </div>
+      <div class="unidades__cartao">
+        <h2 class="secao__titulo" data-campo="unidades-titulo"></h2>
+        <p class="unidades__linha" data-campo="unidades-linha"></p>
+        <ul class="unidades__lista" data-unidades></ul>
+        <p class="unidades__horario" data-campo="unidades-horario"></p>
+        <a class="botao botao--acento" data-zap-simples href="#planos"
+           data-campo="unidades-botao">Matricule-se</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PLANOS -->
+  <section class="secao secao--planos" id="planos">
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="chapeu">Mensal, sem fidelidade</p>
+        <h2 class="secao__titulo">Planos</h2>
+      </header>
+      <div class="planos" data-planos hidden></div>
+
+      <noscript>
+        <p class="aviso">A tabela de planos precisa de JavaScript. Fale com a recepção pelos
+          contatos no <a href="#contato">rodapé</a>.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- 8. APLICATIVO -->
+  <section class="secao secao--app" id="app">
+    <div class="secao__interno">
+      <div class="app">
+        <div class="app__texto">
+          <h2 class="titulo-gigante" data-campo="app-titulo"></h2>
+          <p class="app__descricao" data-campo="app-texto"></p>
+          <ul class="app__recursos" data-app-recursos></ul>
+        </div>
+
+        <div class="app__baixar">
+          <p class="app__chamada" data-campo="app-chamada"></p>
+          <div class="app__codigo" data-app-codigo aria-hidden="true"></div>
+          <p class="app__instrucao" data-campo="app-instrucao"></p>
+          <p class="app__ficticio">Aplicativo de demonstração. O código acima não leva a lugar nenhum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 9. RODAPÉ -->
+<footer class="rodape" id="contato">
+  <!-- Único conteúdo fora de dados.js: o que aparece se o JavaScript
+       estiver desligado. Mantenha em dia junto com dados.js. -->
+  <noscript>
+    <div class="rodape__sem-js">
+      <h2>Contato</h2>
+      <p>Av. Paulista, 1200 — Bela Vista, São Paulo</p>
+      <p><a href="tel:+551133334444">(11) 3333-4444</a></p>
+      <p><a href="mailto:contato@academiapulso.com.br">contato@academiapulso.com.br</a></p>
+      <p>Todas as unidades abrem das 6h às 23h nos dias úteis.</p>
+      <p><a href="https://wa.me/5511999999999">Falar no WhatsApp</a></p>
+    </div>
+  </noscript>
+
+  <div class="rodape__interno">
+    <div class="rodape__marca-bloco">
+      <p class="rodape__marca" data-campo="nome">Pulso</p>
+      <p class="rodape__tagline" data-campo="rodape-tagline"></p>
+      <p class="rodape__contato">
+        <a data-campo="telefone-link" href="#"></a><br>
+        <a data-campo="email-link" href="#"></a>
+      </p>
+    </div>
+
+    <div class="rodape__colunas" data-rodape-colunas></div>
+  </div>
+
+  <div class="rodape__base">
+    <ul class="rodape__redes" data-rodape-redes></ul>
+    <p class="rodape__legal">
+      <span data-campo="rodape-cnpj"></span> ·
+      Site modelo. Conteúdo, valores e unidades são fictícios.
+    </p>
+  </div>
+</footer>
+
+<a class="zap-flutuante" data-zap-simples href="#contato" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor">
+    <path d="M12.04 2.02c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.33 4.96L2 22.06l5.3-1.39a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91a9.85 9.85 0 0 0-2.9-7.01 9.82 9.82 0 0 0-7.01-2.94Zm0 18.14a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.21 8.21 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.69 8.22-8.24 8.22Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.65 4.2 3.71.58.25 1.04.4 1.39.51.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.67-1.18.21-.59.21-1.09.15-1.19-.06-.11-.22-.17-.47-.29Z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+
+<script type="module" src="assets/js/principal.js"></script>
+</body>
+</html>

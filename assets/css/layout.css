@@ -1,0 +1,340 @@
+/* ==========================================================================
+   LAYOUT — cabeçalho, seções, botões, rodapé
+   ========================================================================== */
+
+/* Cabeçalho -------------------------------------------------------------- */
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--cor-fundo) 86%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cor-linha);
+}
+
+.cabecalho__interno {
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding: 0.9rem clamp(1.25rem, 4vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.marca {
+  font-family: var(--fonte-display);
+  font-size: 1.75rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.navegacao {
+  display: none;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.navegacao a {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--cor-texto-suave);
+  transition: color 0.25s;
+}
+
+.navegacao a:hover {
+  color: var(--cor-texto);
+}
+
+@media (min-width: 900px) {
+  .navegacao {
+    display: flex;
+  }
+}
+
+/* Botões — pílula, como no site de referência --------------------------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.9rem;
+  font-family: var(--fonte-texto);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s,
+    transform 0.25s;
+}
+
+.botao--acento {
+  background: var(--cor-acento);
+  color: #fff;
+}
+
+.botao--acento:hover {
+  background: var(--vermelho-escuro);
+  transform: translateY(-2px);
+}
+
+.botao--claro {
+  background: var(--cinza-claro);
+  color: var(--grafite);
+}
+
+.botao--claro:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.botao--vazado {
+  border-color: var(--cor-linha);
+  color: var(--cor-texto);
+}
+
+.botao--vazado:hover {
+  border-color: var(--cor-acento);
+  color: var(--cor-acento);
+}
+
+.botao--grande {
+  padding: 1.1rem 2.6rem;
+  font-size: 1rem;
+}
+
+.botao--pequeno {
+  padding: 0.55rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+/* Seções ----------------------------------------------------------------- */
+.secao {
+  position: relative;
+  padding-block: var(--e-secao);
+}
+
+.secao__interno {
+  position: relative;
+  z-index: 1;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.secao__interno--centro {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--e-4);
+}
+
+.secao__cabecalho {
+  max-width: 40ch;
+  margin-bottom: var(--e-4);
+}
+
+.secao__titulo {
+  font-size: var(--t-titulo);
+}
+
+.titulo-gigante {
+  font-size: var(--t-gigante);
+  line-height: 0.95;
+}
+
+/* Fundo fotográfico de seção */
+.secao__fundo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.secao__fundo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--cor-fundo) 0%,
+    color-mix(in srgb, var(--cor-fundo) 62%, transparent) 25%,
+    color-mix(in srgb, var(--cor-fundo) 78%, transparent) 70%,
+    var(--cor-fundo) 100%
+  );
+}
+
+/* Rodapé ----------------------------------------------------------------- */
+.rodape {
+  background: var(--claro-fundo);
+  color: var(--claro-texto);
+  padding-block: var(--e-5) var(--e-3);
+}
+
+.rodape__interno {
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  display: grid;
+  gap: var(--e-4);
+}
+
+@media (min-width: 820px) {
+  .rodape__interno {
+    grid-template-columns: 1fr 1.6fr;
+    gap: var(--e-5);
+  }
+}
+
+.rodape__marca {
+  font-family: var(--fonte-display);
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: var(--e-2);
+}
+
+.rodape__tagline {
+  color: var(--claro-texto-suave);
+  max-width: 30ch;
+  margin-bottom: var(--e-2);
+}
+
+.rodape__contato a {
+  color: var(--claro-texto);
+  text-underline-offset: 3px;
+}
+
+.rodape__contato a:hover {
+  color: var(--cor-acento);
+}
+
+.rodape__colunas {
+  display: grid;
+  gap: var(--e-3);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 560px) {
+  .rodape__colunas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.rodape__coluna h2 {
+  font-family: var(--fonte-texto);
+  font-size: var(--t-miudo);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--claro-texto);
+  margin-bottom: var(--e-2);
+}
+
+.rodape__coluna li {
+  padding-block: 0.28rem;
+}
+
+.rodape__coluna a {
+  font-size: 0.9375rem;
+  color: var(--claro-texto-suave);
+  text-decoration: none;
+}
+
+.rodape__coluna a:hover {
+  color: var(--cor-acento);
+}
+
+.rodape__base {
+  max-width: var(--largura-max);
+  margin: var(--e-5) auto 0;
+  padding: var(--e-3) clamp(1.25rem, 4vw, 2.5rem) 0;
+  border-top: 1px solid var(--claro-linha);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2) var(--e-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rodape__redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+}
+
+.rodape__redes a {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--claro-texto);
+  text-decoration: none;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--claro-linha);
+  border-radius: 999px;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.rodape__redes a:hover {
+  border-color: var(--cor-acento);
+  color: var(--cor-acento);
+}
+
+.rodape__legal {
+  font-size: 0.8125rem;
+  color: var(--claro-texto-suave);
+}
+
+.rodape__sem-js {
+  max-width: var(--largura-max);
+  margin: 0 auto var(--e-4);
+  padding: var(--e-3) clamp(1.25rem, 4vw, 2.5rem);
+  border-left: 2px solid var(--cor-acento);
+}
+
+.rodape__sem-js h2 {
+  font-size: 1.25rem;
+  margin-bottom: var(--e-2);
+}
+
+.rodape__sem-js p {
+  color: var(--claro-texto-suave);
+  margin-bottom: 0.35rem;
+}
+
+.rodape__sem-js a {
+  color: var(--claro-texto);
+}
+
+/* WhatsApp flutuante ----------------------------------------------------- */
+.zap-flutuante {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.2rem;
+  background: var(--cor-acento);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 999px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s, background-color 0.25s;
+}
+
+.zap-flutuante:hover {
+  background: var(--vermelho-escuro);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 560px) {
+  .zap-flutuante span {
+    display: none;
+  }
+
+  .zap-flutuante {
+    padding: 0.85rem;
+  }
+}
