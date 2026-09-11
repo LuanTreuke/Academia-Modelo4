@@ -164,69 +164,265 @@
   color: var(--cor-acento);
 }
 
+/* Carrossel 3D montado por vitrine.js. A foto do centro fica maior e
+   inclina com o mouse; as vizinhas giram para os lados. Sem barra de
+   rolagem: a troca é pelas setas, pelo teclado ou deslizando o dedo.
+   Slides, textos e fundos ficam empilhados na mesma célula do grid e só
+   mudam de posição pelos atributos data-atual, data-proximo,
+   data-anterior e data-oculto. */
 .vitrine {
-  display: flex;
-  gap: var(--e-2);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-inline: max(
-    clamp(1.25rem, 4vw, 2.5rem),
-    calc((100vw - var(--largura-max)) / 2)
+  --slide-largura: clamp(170px, 24vw, 300px);
+  --slide-proporcao: 2 / 3;
+  --vitrine-duracao: 800ms;
+  --vitrine-curva: ease;
+  --vitrine-margem: clamp(1.25rem, 4vw, 2.5rem);
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: min(
+    calc(100% - 2 * var(--vitrine-margem)),
+    calc(var(--largura-max) - 5rem)
   );
-  scroll-padding-inline: max(
-    clamp(1.25rem, 4vw, 2.5rem),
-    calc((100vw - var(--largura-max)) / 2)
-  );
-  padding-bottom: var(--e-2);
-  scrollbar-width: thin;
+  /* a foto do centro tem escala 1.2 e proporção 2:3, logo 1.8x a largura */
+  min-height: calc(var(--slide-largura) * 1.8 + clamp(6rem, 12vw, 10rem));
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--raio-grande);
+  background: var(--grafite);
+  color: #fff;
+  touch-action: pan-y;
+  user-select: none;
 }
 
-.vitrine__item {
+.vitrine__slides,
+.vitrine__infos {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.vitrine__slides > *,
+.vitrine__infos > * {
+  grid-area: 1 / 1;
+}
+
+/* Fundo: a foto atual, ampliada, desfocada e escurecida */
+.vitrine__fundos {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.vitrine__fundo {
+  position: absolute;
+  inset: -20%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  transition: opacity var(--vitrine-duracao) ease,
+    transform var(--vitrine-duracao) ease;
+}
+
+.vitrine__fundo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--grafite) 80%, transparent);
+}
+
+.vitrine__fundo:not([data-atual]) {
+  opacity: 0;
+}
+
+.vitrine__fundo[data-anterior] {
+  transform: translateX(-10%);
+}
+
+.vitrine__fundo[data-proximo] {
+  transform: translateX(10%);
+}
+
+/* Slides */
+.vitrine__slide {
+  width: var(--slide-largura);
+  aspect-ratio: var(--slide-proporcao);
+  transform: perspective(1000px) translate3d(var(--slide-x, 0px), 0, 0)
+    rotateY(var(--slide-giro, 0deg)) scale(var(--slide-escala, 1));
+  transition: transform var(--vitrine-duracao) var(--vitrine-curva),
+    opacity var(--vitrine-duracao) var(--vitrine-curva);
+}
+
+.vitrine__slide[data-atual] {
+  --slide-escala: 1.2;
+  pointer-events: auto;
+}
+
+.vitrine__slide[data-proximo] {
+  --slide-x: calc(var(--slide-largura) * 1.07);
+  --slide-giro: -45deg;
+}
+
+.vitrine__slide[data-anterior] {
+  --slide-x: calc(var(--slide-largura) * -1.07);
+  --slide-giro: 45deg;
+}
+
+.vitrine__slide[data-oculto] {
+  --slide-escala: 0.8;
+  opacity: 0;
+}
+
+/* As variáveis --inclina-* e --foto-* são animadas por vitrine.js */
+.vitrine__slide-interno,
+.vitrine__info-interno {
   position: relative;
-  flex: 0 0 min(80vw, 400px);
-  aspect-ratio: 3 / 4;
-  scroll-snap-align: start;
-  border-radius: var(--raio);
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--inclina-x, 0deg)) rotateY(var(--inclina-y, 0deg));
+}
+
+.vitrine__moldura {
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  border-radius: var(--raio);
   background: var(--grafite-alto);
 }
 
-.vitrine__item img {
+.vitrine__foto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.5);
+  transform: translate(-50%, -50%) scale(1.25)
+    translate3d(var(--foto-x, 0%), var(--foto-y, 0%), 0);
+  transition: filter var(--vitrine-duracao) var(--vitrine-curva);
 }
 
-.vitrine__etiquetas {
+.vitrine__slide[data-atual] .vitrine__foto {
+  filter: brightness(0.8);
+}
+
+/* Textos sobre a foto do centro */
+.vitrine__info {
+  position: relative;
+  z-index: 100;
+  width: var(--slide-largura);
+  aspect-ratio: var(--slide-proporcao);
+  perspective: 800px;
+}
+
+.vitrine__textos {
   position: absolute;
-  left: var(--e-2);
-  bottom: var(--e-2);
-  right: var(--e-2);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  left: -15%;
+  bottom: 15%;
+  transform: translateZ(45px);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
 }
 
-.etiqueta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.8rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: #fff;
-  background: color-mix(in srgb, var(--grafite) 72%, transparent);
-  backdrop-filter: blur(6px);
-  border-radius: 999px;
+.vitrine__texto {
+  overflow: hidden;
+  padding-bottom: 0.08em;
 }
 
-.etiqueta::before {
-  content: '';
-  width: 6px;
-  height: 6px;
+.vitrine__texto span {
+  display: block;
+  white-space: nowrap;
+  transition: opacity var(--vitrine-duracao) var(--vitrine-curva),
+    transform var(--vitrine-duracao) var(--vitrine-curva);
+}
+
+.vitrine__info[data-atual] .vitrine__texto span {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 250ms;
+}
+
+.vitrine__info:not([data-atual]) .vitrine__texto span {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+  transition-delay: 0ms;
+}
+
+.vitrine__titulo {
+  font-family: var(--fonte-display);
+  font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.vitrine__subtitulo {
+  margin-left: clamp(0.75rem, 1.5vw, 1.25rem);
+  font-size: var(--t-miudo);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.vitrine__descricao {
+  margin-left: clamp(0.4rem, 0.8vw, 0.65rem);
+  font-size: 0.875rem;
+  color: var(--cinza-claro);
+}
+
+/* Setas */
+.vitrine__seta {
+  position: absolute;
+  top: 50%;
+  z-index: 200;
+  display: inline-grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
+  color: #fff;
+  background: color-mix(in srgb, var(--grafite) 45%, transparent);
+  opacity: 0.75;
+  transform: translateY(-50%);
+  transition: opacity 0.25s, background-color 0.25s;
+}
+
+.vitrine__seta:hover {
+  opacity: 1;
   background: var(--cor-acento);
-  flex: none;
+}
+
+.vitrine__seta--anterior {
+  left: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.vitrine__seta--proxima {
+  right: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.vitrine__seta svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Anuncia a foto nova para leitor de tela, sem aparecer na tela */
+.vitrine__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* -------------------------------------------------------- 5. MODALIDADES */

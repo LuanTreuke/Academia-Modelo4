@@ -12,6 +12,9 @@ um site indicado pelo cliente — a ordem das seções e o tipo de bloco de
 cada uma. Nome, textos, fotos, paleta e código são originais. Nada do
 site de referência foi copiado, e o template pode ser revendido.
 
+A animação da vitrine foi adaptada do
+[Voyage Slider](https://github.com/devloop01/voyage-slider), de devloop01.
+
 ## Como rodar na sua máquina
 
 ```bash
@@ -39,7 +42,7 @@ Tudo está em **`assets/js/dados.js`**:
 | `hero` | Título, linha de apoio e texto do botão |
 | `manifesto` | Título e as duas colunas do cartão |
 | `declaracao` | A frase gigante do meio da página |
-| `vitrine` | As três fotos e suas etiquetas |
+| `vitrine` | Fotos do carrossel 3D, com título, subtítulo e descrição de cada uma |
 | `modalidades` | Os cards de aula |
 | `unidades` | Lista de endereços e horário |
 | `planos` | Nome, preço e descrição |
@@ -104,6 +107,7 @@ assets/
   js/
     dados.js      ← o arquivo do cliente
     conteudo.js   preenche todas as seções
+    vitrine.js    o carrossel 3D da vitrine
     util.js       funções compartilhadas e a palavra em destaque
     principal.js  amarra tudo
   img/            as seis fotos

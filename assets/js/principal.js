@@ -5,5 +5,7 @@
  */
 import { ACADEMIA } from './dados.js';
 import * as conteudo from './conteudo.js';
+import { desenharVitrine } from './vitrine.js';
 
 conteudo.iniciar(ACADEMIA);
+desenharVitrine(ACADEMIA);

@@ -45,22 +45,30 @@ export const ACADEMIA = {
 
   declaracao: 'Musculação & performance',
 
-  // As etiquetas aparecem sobre cada foto do carrossel.
+  // Carrossel 3D. Aceita quantas fotos quiser; título, subtítulo e
+  // descrição aparecem sobre a foto do centro. Títulos curtos, de uma ou
+  // duas palavras, cabem melhor no celular.
   vitrine: [
     {
       imagem: 'assets/img/sala-1.jpg',
       alt: 'Corredor central entre fileiras de aparelhos de musculação',
-      etiquetas: ['Equipamento de linha', 'Manutenção mensal'],
+      titulo: 'Musculação',
+      subtitulo: 'Equipamento de linha',
+      descricao: 'Manutenção mensal',
     },
     {
       imagem: 'assets/img/sala-2.jpg',
       alt: 'Área de peso livre com racks de agachamento e halteres',
-      etiquetas: ['Peso livre', 'Oito racks'],
+      titulo: 'Peso livre',
+      subtitulo: 'Oito racks',
+      descricao: 'Halteres e anilhas à vontade',
     },
     {
       imagem: 'assets/img/sala-3.jpg',
       alt: 'Estúdio de aulas coletivas com bikes de spinning',
-      etiquetas: ['Estúdios exclusivos', 'Turma com vaga marcada'],
+      titulo: 'Estúdios',
+      subtitulo: 'Exclusivos',
+      descricao: 'Turma com vaga marcada',
     },
   ],
   vitrineBotao: 'Conhecer as unidades',

@@ -1,6 +1,7 @@
 /**
  * Preenche tudo que vem direto de dados.js: identidade, hero, manifesto,
- * declaração, vitrine, modalidades, unidades, planos, app e rodapé.
+ * declaração, modalidades, unidades, planos, app e rodapé.
+ * A vitrine, que é interativa, fica em vitrine.js.
  */
 import { comDestaque, criar, linkZap, moeda } from './util.js';
 
@@ -96,37 +97,6 @@ function desenharDeclaracao(dados) {
     if (indice > 0) raiz.append(criar('em', { texto: '&' }));
     raiz.append(document.createTextNode(parte));
   });
-}
-
-function desenharVitrine(dados) {
-  const raiz = document.querySelector('[data-vitrine]');
-  if (!raiz) return;
-
-  for (const item of dados.vitrine) {
-    const figura = criar('figure', { classe: 'vitrine__item' });
-
-    const foto = criar('img', {
-      src: item.imagem,
-      alt: item.alt,
-      loading: 'lazy',
-      decoding: 'async',
-    });
-    // Foto que falta some, mas o bloco continua com as etiquetas.
-    foto.addEventListener('error', () => foto.remove());
-
-    figura.append(
-      foto,
-      criar(
-        'figcaption',
-        { classe: 'vitrine__etiquetas' },
-        item.etiquetas.map((texto) =>
-          criar('span', { classe: 'etiqueta', texto }),
-        ),
-      ),
-    );
-    raiz.append(figura);
-  }
-  raiz.hidden = false;
 }
 
 function desenharModalidades(dados) {
@@ -282,7 +252,6 @@ export function iniciar(dados) {
   aplicarIdentidade(dados);
   desenharManifesto(dados);
   desenharDeclaracao(dados);
-  desenharVitrine(dados);
   desenharModalidades(dados);
   desenharUnidades(dados);
   desenharPlanos(dados);
